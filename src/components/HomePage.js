@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export default function HomePage() {
   const [posts, setPosts] = useState([]);
-
+  
   useEffect(() => {
     setPosts([{
       id: 1,
