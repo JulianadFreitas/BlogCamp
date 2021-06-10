@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import PostManipulation from './PostManipulation/PostManipulation';
 
+
 export default function NewStoryPage() {
   const [title, setTitle] = useState('');
   const [coverUrl, setCoverUrl] = useState('');
@@ -10,7 +11,19 @@ export default function NewStoryPage() {
   const [isSaveButtonDisabled, setSaveButtonDisable] = useState(false);
   const history = useHistory();
 
-  function onPostSaveButtonClick() {}
+  function onPostSaveButtonClick() {
+
+    const body = {
+         title: title,
+         coverUrl: coverUrl,
+         content: content
+    }
+    const request = axios.post("http://localhost:4000/posts", body);
+    request.then((response) => 
+    {console.log("deu certo :D", response.data);
+    setSaveButtonDisable(true);});
+    request.catch(() => console.log("DEU RUIM"));
+  }
 
   return (
     <PostManipulation

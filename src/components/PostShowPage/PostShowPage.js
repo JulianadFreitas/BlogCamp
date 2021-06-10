@@ -11,17 +11,19 @@ import axios from 'axios';
 
 export default function PostShowPage() {
   const { postId } = useParams();
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState();
   const history = useHistory();
 
   useEffect(() => {
-    setPost({
-      id: 1,
-      title: 'Hello World',
-      coverUrl: 'https://miro.medium.com/max/1024/1*OohqW5DGh9CQS4hLY5FXzA.png',
-      contentPreview: 'Esta é a estrutura de um post esperado pelo front-end',
-      content: 'Este é o conteúdo do post, o que realmente vai aparecer na página do post...'
-    })
+
+    const request = axios.get(`http://localhost:4000/posts/${postId}`);
+    request.then((response)  => {
+      console.log(response.data, "show page deu certo");
+      setPost(response.data);
+    }
+      );
+      request.catch(()=> console.log("erro")
+      ) ;
   }, [postId]);
 
   function onEditButtonClick() {

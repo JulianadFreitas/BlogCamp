@@ -6,7 +6,7 @@ import PostManipulation from './PostManipulation/PostManipulation';
 
 export default function PostEditPage() {
   const { postId } = useParams();
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState('');
   const [title, setTitle] = useState('');
   const [coverUrl, setCoverUrl] = useState('');
   const [content, setContent] = useState('');
@@ -14,25 +14,38 @@ export default function PostEditPage() {
   const history = useHistory();
 
   useEffect(() => {
-    const post = {
-      id: 1,
-      title: 'Hello World',
-      coverUrl: 'https://miro.medium.com/max/1024/1*OohqW5DGh9CQS4hLY5FXzA.png',
-      contentPreview: 'Esta é a estrutura de um post esperado pelo front-end',
-      content: 'Este é o conteúdo do post, o que realmente vai aparecer na página do post...'
-    };
-
-    setPost(post);
-
-    setTitle(post.title);
-    setCoverUrl(post.coverUrl);
-    setContent(post.content);
+    const request = axios.get(`http://localhost:4000/posts/${postId}`);
+    request.then((response)=> {
+      
+    console.log(response.data,"edit");
+    setPost(response.data);
+    setContent(response.data.content);
+    setTitle(response.data.title);
+    setCoverUrl(response.data.coverUrl);
+    console.log(response.data,"edit");
+    console.log(response.data.title)
+    }
+    )
+    request.catch(()=> console.log("erro")
+    )
+    
   }, [postId]);
 
-  function onPostSaveButtonClick() {}
+  function onPostSaveButtonClick() { // querems atualizar com o que foi editado
+    
+    const body = {
+      title: title,
+      coverUrl: coverUrl,
+      content: content
+ }
+ const request = axios.put("http://localhost:4000/posts/:postId", body);
+ request.then((response) => 
+ {console.log("deu certo :D", response.data);
+ setSaveButtonDisable(true);});
+ request.catch(() => console.log("DEU RUIM"));  }
 
-  if (!post || !content) return <Spinner />;
-
+ 
+ if (!post) return <Spinner />; //se o contante no if funciona
   return (
     <PostManipulation
       title={title}
