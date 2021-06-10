@@ -20,8 +20,9 @@ export default function NewStoryPage() {
     }
     const request = axios.post("http://localhost:4000/posts", body);
     request.then((response) => 
+    {
     setSaveButtonDisable(true);});
-    request.catch(() => console.log("Erro"));
+    request.catch(() => console.log("DEU RUIM"));
   }
 
   return (

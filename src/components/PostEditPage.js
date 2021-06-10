@@ -38,6 +38,7 @@ export default function PostEditPage() {
  }
  const request = axios.put("http://localhost:4000/posts/:postId", body);
  request.then((response) => 
+ {;
  setSaveButtonDisable(true);});
  request.catch(() => console.log("DEU RUIM"));  }
 
