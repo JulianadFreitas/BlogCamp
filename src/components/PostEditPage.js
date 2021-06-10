@@ -16,14 +16,12 @@ export default function PostEditPage() {
   useEffect(() => {
     const request = axios.get(`http://localhost:4000/posts/${postId}`);
     request.then((response)=> {
-      
-    console.log(response.data,"edit");
+    
     setPost(response.data);
     setContent(response.data.content);
     setTitle(response.data.title);
     setCoverUrl(response.data.coverUrl);
-    console.log(response.data,"edit");
-    console.log(response.data.title)
+  
     }
     )
     request.catch(()=> console.log("erro")
@@ -40,7 +38,6 @@ export default function PostEditPage() {
  }
  const request = axios.put("http://localhost:4000/posts/:postId", body);
  request.then((response) => 
- {console.log("deu certo :D", response.data);
  setSaveButtonDisable(true);});
  request.catch(() => console.log("DEU RUIM"));  }
 

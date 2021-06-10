@@ -11,7 +11,6 @@ export default function PostComments({ postId }) {
   useEffect(() => {
    const request = axios.get(`http://localhost:4000/posts/${postId}/comments`);
    request.then((response)=> {
-     console.log(response.data)
      setComments(response.data);
    });
 

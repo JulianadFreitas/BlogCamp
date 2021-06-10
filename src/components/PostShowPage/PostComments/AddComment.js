@@ -8,23 +8,21 @@ export default function AddComment({ postId, comments, setComments }) {
   const [content, setContent] = useState('');
 
   function onAddCommentButtonClick() {
-    //post
-
     const body = {
       author: name,
-      content}
- const request = axios.post(`http://localhost:4000/posts/${postId}/comments`, body);
- request.then((response) => 
- {console.log("deu certo coments", response.data);
- setName('');
- setContent('');
- setComments([...comments, response.data]);
- });
- request.catch(() => {
-   console.log("DEU RUIM coments");
-   setName('');
-   setContent('');});
- 
+      content
+    }
+    const request = axios.post(`http://localhost:4000/posts/${postId}/comments`, body);
+    request.then((response) => {
+      setName('');
+      setContent('');
+      setComments([...comments, response.data]);
+    });
+    request.catch(() => {
+      setName('');
+      setContent('');
+    });
+
   }
 
   return (

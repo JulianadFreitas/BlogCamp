@@ -18,7 +18,6 @@ export default function PostShowPage() {
 
     const request = axios.get(`http://localhost:4000/posts/${postId}`);
     request.then((response)  => {
-      console.log(response.data, "show page deu certo");
       setPost(response.data);
     }
       );

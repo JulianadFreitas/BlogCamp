@@ -20,9 +20,8 @@ export default function NewStoryPage() {
     }
     const request = axios.post("http://localhost:4000/posts", body);
     request.then((response) => 
-    {console.log("deu certo :D", response.data);
     setSaveButtonDisable(true);});
-    request.catch(() => console.log("DEU RUIM"));
+    request.catch(() => console.log("Erro"));
   }
 
   return (
